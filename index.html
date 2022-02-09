@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <title>Hery's Website</title>
+    <body onload="startGame()">
+      <p>click 10 times in 5 seconds for master title</p>
+      <h1 id="count">0</h1>
+      <button id="click">CLICK ME</button>
+      <button id="reset">RESET GAME</button>
+    </body>
+    <script>
+      var count = 0;
+      var time = 0;
+
+      function countUp() {
+        count++;
+        document.getElementById("count").innerHTML = count;
+      }
+
+      function startGame() {
+        resetGame();
+        var timer = setInterval(function () {
+          time++;
+          if (time == 5) {
+            clearInterval(timer);
+            if (count >= 10 && count <= 15) {
+              alert("you are master");
+            } else if (count >= 15 && count <= 20) {
+              alert("you are SUPER master");
+            } else if (count >= 20) {
+              alert("you are king of page");
+            }
+          }
+        }, 1000);
+      }
+
+      function resetGame() {
+        count = 0;
+        timer = 0;
+        document.getElementById("count").innerHTML = count;
+      }
+
+      document.getElementById("click").addEventListener("click", function () {
+        countUp();
+      });
+
+      document.getElementById("reset").addEventListener("click", function () {
+        startGame();
+      });
+    </script>
+  </header>
+</html>
