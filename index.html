@@ -1,52 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <header>
-    <title>Hery's Website</title>
-    <body onload="startGame()">
-      <p>click 10 times in 5 seconds for master title</p>
-      <h1 id="count">0</h1>
-      <button id="click">CLICK ME</button>
-      <button id="reset">RESET GAME</button>
-    </body>
-    <script>
-      var count = 0;
-      var time = 0;
+<body onload="startGame()">
 
-      function countUp() {
-        count++;
-        document.getElementById("count").innerHTML = count;
-      }
+<h1>Name Game</h1>
 
-      function startGame() {
+<p>Enter  type pop cool pic 2 have picture show.</p>
+
+<label for="newspapername">type here:</label>
+<input type="text" id="newspapername" name="newspapername"><br><br>
+<input onclick="submit()" type="submit" value="Submit">
+
+<img id="image" style="display: none;" src="https://wallpapersflix.com/cool/wp-content/uploads/2020/07/Cool-Wallpaper-For-Laptop.jpg" alt="Trulli" width="500" height="333">
+
+<script>
+    var time = 0;
+
+    function checkAnswer() {
+        const answer = document.getElementById("newspapername").value
+        if (answer == 'pop cool pic') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function submit() {
+        if (time <= 10) {
+            if (checkAnswer() === true) {
+                document.getElementById("image").style.display = ""
+                alert("You win!")
+                time = 11
+            } else {
+                alert("try again!")
+            }
+        } else {
+            alert("You've run out of time :(")
+        }
+    }
+
+    function startGame() {
         resetGame();
         var timer = setInterval(function () {
           time++;
-          if (time == 5) {
-            clearInterval(timer);
-            if (count >= 10 && count <= 15) {
-              alert("you are master");
-            } else if (count >= 15 && count <= 20) {
-              alert("you are SUPER master");
-            } else if (count >= 20) {
-              alert("you are king of page");
+          if (time == 10) {
+            if (checkAnswer() === true) {
+                document.getElementById("image").style.display = ""
+                alert("You win!")
+            } else {
+                alert("You lose :(")
             }
           }
         }, 1000);
       }
 
       function resetGame() {
-        count = 0;
         timer = 0;
-        document.getElementById("count").innerHTML = count;
       }
+</script>
 
-      document.getElementById("click").addEventListener("click", function () {
-        countUp();
-      });
-
-      document.getElementById("reset").addEventListener("click", function () {
-        startGame();
-      });
-    </script>
-  </header>
+</body>
 </html>
